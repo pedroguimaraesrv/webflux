@@ -23,22 +23,22 @@ public class PlaylistController {
 	@Autowired
 	PlaylistService service;
 	
-	@GetMapping(value= "/playlist")
+	@GetMapping(value= "/playlists")
 	public Flux<Playlist> getPlaylist(){
 		return service.findAll();
 	}
 	
-	@GetMapping(value="/playlist/{id}")
+	@GetMapping(value="/playlists/{id}")
 	public Mono<Playlist> getPlaylistId(@PathVariable String id){
 		return service.findById(id);
 	}
 	
-	@PostMapping(value="/playlist")
+	@PostMapping(value="/playlists")
 	public Mono<Playlist> save(@RequestBody Playlist playlist){
 		return service.save(playlist);
 	}
 	
-	@GetMapping(value="/playlist/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@GetMapping(value="/playlists/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<Tuple2<Long, Playlist>> getPlaylistByEvents(){
 		
 		Flux<Long> interval = Flux.interval(Duration.ofSeconds(10));
